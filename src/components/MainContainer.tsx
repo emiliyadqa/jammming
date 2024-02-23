@@ -17,7 +17,7 @@ import Playlist from "./Playlist";
 
 const MainContainer = () => {
   return (
-    <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+    <Stack direction={{ xs: "column", sm: "row" }} spacing={2} marginTop="30px">
       <Container>
         <Results></Results>
       </Container>

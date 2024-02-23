@@ -22,7 +22,7 @@ const SearchInput = styled("div")(({ theme }) => ({
   backgroundColor: "white",
   padding: "0 10px",
   borderRadius: theme.shape.borderRadius,
-  width: "40%",
+  width: "60%",
   display: "flex",
   justifyContent: "flex-start",
 }));

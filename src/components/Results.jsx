@@ -2,6 +2,7 @@ import {
   Box,
   Card,
   CardHeader,
+  Divider,
   List,
   ListItem,
   Typography,
@@ -10,8 +11,15 @@ import React from "react";
 
 const Results = () => {
   return (
-    <Card sx={{ textAlign: "center" }}>
-      <CardHeader title="Results">Results</CardHeader>
+    <Card
+      sx={{
+        textAlign: "center",
+        height: "500px",
+        backgroundColor: "#DEDDDD",
+      }}
+    >
+      <CardHeader title="RESULTS">Results</CardHeader>
+      <Divider />
       <List>
         <ListItem>Song 1</ListItem>
         <ListItem>Song 2</ListItem>
