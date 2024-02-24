@@ -3,36 +3,19 @@ import { AccountCircle, Audiotrack, Search } from "@mui/icons-material";
 import {
   AppBar,
   Box,
-  Button,
   IconButton,
-  InputBase,
   Menu,
   MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import SearchInput from "./SearchInput";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
 });
-
-const SearchInput = styled("div")(({ theme }) => ({
-  backgroundColor: "white",
-  padding: "0 10px",
-  borderRadius: theme.shape.borderRadius,
-  width: "60%",
-  display: "flex",
-  justifyContent: "flex-start",
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  paddingRight: "7px",
-}));
 
 const AccountIcon = styled(Box)(({ theme }) => ({}));
 
@@ -46,12 +29,7 @@ const NavBar = () => {
           Jammming
         </Typography>
         <Audiotrack sx={{ display: { xs: "block", sm: "none" } }} />
-        <SearchInput>
-          <SearchIconWrapper>
-            <Search color="action" />
-          </SearchIconWrapper>
-          <InputBase placeholder="Search some tracks..."></InputBase>
-        </SearchInput>
+        <SearchInput />
         <AccountIcon>
           <IconButton
             size="large"
