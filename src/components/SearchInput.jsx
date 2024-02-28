@@ -1,6 +1,8 @@
 import { Search } from "@mui/icons-material";
 import { InputBase, styled } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import access_token from "../services/auth-token";
 
 const SearchInputField = styled("form")(({ theme }) => ({
   backgroundColor: "white",
@@ -18,47 +20,30 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   paddingRight: "7px",
 }));
 
-async function getAccessToken() {
-  try {
-    const formData = new URLSearchParams();
-    formData.append("grant_type", "client_credentials");
-    formData.append("client_id", "15dd23c9e24648918b26e966059eb4a7");
-    formData.append("client_secret", "4ac84a69b7a944e88a0b6caf49dc6007");
-
-    const result = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: formData,
-    });
-
-    if (!result.ok) {
-      throw new Error("Failed to fetch access token");
-    }
-
-    const { access_token } = await result.json();
-    return access_token;
-  } catch (error) {
-    console.error("Error fetching access token:", error);
-    throw error;
-  }
-}
-
-async function printAccessToken() {
-  try {
-    const accessToken = await getAccessToken();
-    console.log("Access Token:", accessToken);
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-}
-
 const SearchInput = () => {
   const inputRef = useRef(null);
+  const [serchResult, setSearchResult] = useState("");
+
+  const onSearch = (value) => {
+    axios
+      .get(`https://api.spotify.com/v1/search?q=${value}&type=track`, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then(function (res) {
+        setSearchResult(res.data.tracks);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputRef.current.value);
-    printAccessToken();
+    //console.log(inputRef.current.value);
+    onSearch(inputRef.current.value);
+    //console.log("Search Result:", serchResult);
   };
 
   return (
