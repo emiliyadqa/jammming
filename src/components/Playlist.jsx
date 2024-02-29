@@ -17,6 +17,8 @@ const Playlist = ({ playlistTacks }) => {
       sx={{
         height: "500px",
         backgroundColor: "#DEDDDD",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <CardHeader
@@ -24,7 +26,7 @@ const Playlist = ({ playlistTacks }) => {
         sx={{ textAlign: "center" }}
       ></CardHeader>
       <Divider />
-      <List>
+      <List sx={{ flexGrow: 1, overflowY: "auto" }}>
         {playlistTacks.map((track) => {
           return (
             <ListItem key={track.id}>
@@ -36,7 +38,7 @@ const Playlist = ({ playlistTacks }) => {
           );
         })}
       </List>
-      <CardActions sx={{ justifyContent: "center" }}>
+      <CardActions sx={{ justifyContent: "center", marginBottom: "10px" }}>
         <Button size="large" variant="outlined" startIcon={<Save />}>
           Save to Sotify
         </Button>
