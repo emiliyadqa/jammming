@@ -4,22 +4,38 @@ import {
   AppBar,
   Box,
   IconButton,
+  InputBase,
   Menu,
   MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import SearchInput from "./SearchInput";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
 });
 
+const SearchInputField = styled("form")(({ theme }) => ({
+  backgroundColor: "white",
+  padding: "0 10px",
+  borderRadius: theme.shape.borderRadius,
+  width: "60%",
+  display: "flex",
+  justifyContent: "flex-start",
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingRight: "7px",
+}));
+
 const AccountIcon = styled(Box)(({ theme }) => ({}));
 
-const NavBar = () => {
+const NavBar = ({ handleSubmit, inputRef }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -29,7 +45,15 @@ const NavBar = () => {
           Jammming
         </Typography>
         <Audiotrack sx={{ display: { xs: "block", sm: "none" } }} />
-        <SearchInput />
+        <SearchInputField onSubmit={(event) => handleSubmit(event)}>
+          <SearchIconWrapper>
+            <Search color="action" />
+          </SearchIconWrapper>
+          <InputBase
+            placeholder="Search some tracks..."
+            inputRef={inputRef}
+          ></InputBase>
+        </SearchInputField>
         <AccountIcon>
           <IconButton
             size="large"

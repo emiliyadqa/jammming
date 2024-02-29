@@ -1,20 +1,17 @@
 import { Save } from "@mui/icons-material";
 import {
-  Box,
   Button,
   Card,
   CardActions,
-  CardContent,
   CardHeader,
   Divider,
-  Input,
   List,
   ListItem,
-  Typography,
+  ListItemText,
 } from "@mui/material";
 import React from "react";
 
-const Playlist = () => {
+const Playlist = ({ playlistTacks }) => {
   return (
     <Card
       sx={{
@@ -28,10 +25,16 @@ const Playlist = () => {
       ></CardHeader>
       <Divider />
       <List>
-        <ListItem>Song 1</ListItem>
-        <ListItem>Song 2</ListItem>
-        <ListItem>Song 3</ListItem>
-        <ListItem>Song 4</ListItem>
+        {playlistTacks.map((track) => {
+          return (
+            <ListItem key={track.id}>
+              <ListItemText
+                primary={track.name}
+                secondary={`${track.artists[0].name} | ${track.album.name}`}
+              ></ListItemText>
+            </ListItem>
+          );
+        })}
       </List>
       <CardActions sx={{ justifyContent: "center" }}>
         <Button size="large" variant="outlined" startIcon={<Save />}>

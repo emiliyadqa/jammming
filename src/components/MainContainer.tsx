@@ -1,28 +1,30 @@
-import {
-  Box,
-  Card,
-  Container,
-  Grid,
-  Paper,
-  Stack,
-  styled,
-} from "@mui/material";
-import React from "react";
+import { Container, Stack } from "@mui/material";
+import React, { useState } from "react";
 import Results from "./Results";
 import Playlist from "./Playlist";
 
-// const Item = styled(Box)(({ theme }) => ({
-//   backgroundColor: "beige",
-// }));
+const MainContainer = ({ serchResults }) => {
+  const [playlistTacks, setPlaylistTacks] = useState([]);
 
-const MainContainer = () => {
+  const addToPlaylist = (items) => {
+    setPlaylistTacks(items);
+  };
+
   return (
-    <Stack direction={{ xs: "column", sm: "row" }} spacing={2} marginTop="30px">
+    <Stack
+      direction={{ xs: "column", sm: "row" }}
+      spacing={2}
+      marginTop="30px"
+      justifyContent="center"
+    >
       <Container>
-        <Results></Results>
+        <Results
+          serchResults={serchResults}
+          addToPlaylist={addToPlaylist}
+        ></Results>
       </Container>
       <Container>
-        <Playlist></Playlist>
+        <Playlist playlistTacks={playlistTacks}></Playlist>
       </Container>
     </Stack>
   );
