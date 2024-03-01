@@ -5,13 +5,15 @@ import {
   CardActions,
   CardHeader,
   Divider,
+  IconButton,
   List,
   ListItem,
   ListItemText,
 } from "@mui/material";
 import React from "react";
+import RemoveIcon from "@mui/icons-material/Remove";
 
-const Playlist = ({ playlistTacks }) => {
+const Playlist = ({ playlistTracks, removeTrackFromPlaylist }) => {
   return (
     <Card
       sx={{
@@ -27,9 +29,20 @@ const Playlist = ({ playlistTacks }) => {
       ></CardHeader>
       <Divider />
       <List sx={{ flexGrow: 1, overflowY: "auto" }}>
-        {playlistTacks.map((track) => {
+        {playlistTracks.map((track) => {
           return (
-            <ListItem key={track.id}>
+            <ListItem
+              key={track.id}
+              secondaryAction={
+                <IconButton
+                  edge="end"
+                  aria-label="remove"
+                  onClick={() => removeTrackFromPlaylist(track.id)}
+                >
+                  <RemoveIcon />
+                </IconButton>
+              }
+            >
               <ListItemText
                 primary={track.name}
                 secondary={`${track.artists[0].name} | ${track.album.name}`}

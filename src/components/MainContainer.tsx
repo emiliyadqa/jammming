@@ -3,11 +3,20 @@ import React, { useState } from "react";
 import Results from "./Results";
 import Playlist from "./Playlist";
 
-const MainContainer = ({ serchResults }) => {
-  const [playlistTacks, setPlaylistTacks] = useState([]);
+const MainContainer = ({ searchResults }) => {
+  const [selectedTracks, setSelectedTracks] = useState<any[]>([]);
 
-  const addToPlaylist = (items) => {
-    setPlaylistTacks(items);
+  const addTrackToPlaylist = (item) => {
+    if (!selectedTracks.includes(item)) {
+      setSelectedTracks([...selectedTracks, item]);
+    }
+  };
+
+  const removeTrackFromPlaylist = (trackId) => {
+    const updatedPlaylistTracks = selectedTracks.filter(
+      (track) => track.id !== trackId
+    );
+    setSelectedTracks(updatedPlaylistTracks);
   };
 
   return (
@@ -19,12 +28,15 @@ const MainContainer = ({ serchResults }) => {
     >
       <Container>
         <Results
-          serchResults={serchResults}
-          addToPlaylist={addToPlaylist}
+          searchResults={searchResults}
+          addTrackToPlaylist={addTrackToPlaylist}
         ></Results>
       </Container>
       <Container>
-        <Playlist playlistTacks={playlistTacks}></Playlist>
+        <Playlist
+          playlistTracks={selectedTracks}
+          removeTrackFromPlaylist={removeTrackFromPlaylist}
+        ></Playlist>
       </Container>
     </Stack>
   );

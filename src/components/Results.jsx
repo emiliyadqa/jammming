@@ -7,23 +7,11 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 
-const Results = ({ serchResults, addToPlaylist }) => {
-  const [selectedTracks, setSelectedTracks] = useState([]);
-
-  useEffect(() => {
-    addToPlaylist(selectedTracks);
-  }, [selectedTracks]);
-
-  const handleAddToPlaylist = (item) => {
-    if (!selectedTracks.includes(item)) {
-      setSelectedTracks([...selectedTracks, item]);
-    }
-  };
-
-  const items = serchResults.items;
+const Results = ({ searchResults, addTrackToPlaylist }) => {
+  const items = searchResults.items;
   return (
     <Card
       sx={{
@@ -49,7 +37,7 @@ const Results = ({ serchResults, addToPlaylist }) => {
                   <IconButton
                     edge="end"
                     aria-label="add"
-                    onClick={() => handleAddToPlaylist(item)}
+                    onClick={() => addTrackToPlaylist(item)}
                   >
                     <AddIcon />
                   </IconButton>

@@ -8,7 +8,7 @@ import axios from "axios";
 import access_token from "./services/auth-token";
 
 function App() {
-  const [serchResults, setSearchResult] = useState("");
+  const [searchResults, setSearchResult] = useState("");
   const inputRef = useRef(null);
 
   const onSearch = (value) => {
@@ -36,7 +36,7 @@ function App() {
       <Box className="header">
         <NavBar handleSubmit={handleSubmit} inputRef={inputRef}></NavBar>
       </Box>
-      <MainContainer serchResults={serchResults} />
+      <MainContainer searchResults={searchResults} />
     </ThemeProvider>
   );
 }
