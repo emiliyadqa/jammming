@@ -18,7 +18,9 @@ const Results = ({ serchResults, addToPlaylist }) => {
   }, [selectedTracks]);
 
   const handleAddToPlaylist = (item) => {
-    setSelectedTracks([...selectedTracks, item]);
+    if (!selectedTracks.includes(item)) {
+      setSelectedTracks([...selectedTracks, item]);
+    }
   };
 
   const items = serchResults.items;
