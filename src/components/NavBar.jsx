@@ -36,7 +36,16 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const AccountIcon = styled(Box)(({ theme }) => ({}));
 
 const NavBar = ({ handleSubmit, inputRef }) => {
-  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar position="static">
@@ -60,7 +69,7 @@ const NavBar = ({ handleSubmit, inputRef }) => {
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            onClick={(e) => setOpen(true)}
+            onClick={handleClick}
             color="inherit"
           >
             <AccountCircle fontSize="large" />
@@ -69,8 +78,10 @@ const NavBar = ({ handleSubmit, inputRef }) => {
       </StyledToolbar>
       <Menu
         id="menu-appbar"
+        anchorEl={anchorEl}
         open={open}
-        onClose={(e) => setOpen(false)}
+        onClose={handleClose}
+        onClick={handleClose}
         anchorOrigin={{
           vertical: "top",
           horizontal: "right",
@@ -81,8 +92,8 @@ const NavBar = ({ handleSubmit, inputRef }) => {
           horizontal: "right",
         }}
       >
-        <MenuItem onClick={(e) => setOpen(false)}>Profile</MenuItem>
-        <MenuItem onClick={(e) => setOpen(false)}>Log Out</MenuItem>
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>Log Out</MenuItem>
       </Menu>
     </AppBar>
   );
